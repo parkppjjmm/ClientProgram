@@ -10,7 +10,7 @@
 #pragma comment (lib, "Ws2_32.lib")
 #define PORT 8000
 #define PACKET_SIZE 1000
-#define SERVER_IP "192.168.200.100" // ¼­¹ö ¾ÆÀÌÇÇ
+#define SERVER_IP "xxx.xxx.xxx.xxx" // Â¼Â­Â¹Ã¶ Â¾Ã†Ã€ÃŒÃ‡Ã‡
 #define CAMERA_BUFFER_Value2 100
 #define TIMER_ID 1
 
