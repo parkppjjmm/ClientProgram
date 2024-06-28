@@ -15,7 +15,7 @@ The client connects to a server, exchanges data using predefined packet structur
 #pragma comment (lib, "Ws2_32.lib")
 #define PORT 8000
 #define PACKET_SIZE 1000
-#define SERVER_IP "192.168.200.100" // ¼­¹ö ¾ÆÀÌÇÇ
+#define SERVER_IP "xxx.xxx.xxx.xxx" // ì„œë²„ ì•„ì´í”¼
 #define CAMERA_BUFFER_Value2 100
 #define TIMER_ID 1
 
@@ -43,11 +43,11 @@ struct _EXAMPLE_SEND_PACKET clientRecv;
 struct _EXAMPLE_RECV_PACKET ServerRequest;
 
 const std::string currentDateTime() {
-	time_t     now = time(0); //ÇöÀç ½Ã°£À» time_t Å¸ÀÔÀ¸·Î ÀúÀå
+	time_t     now = time(0); //í˜„ì¬ ì‹œê°„ì„ time_t íƒ€ì…ìœ¼ë¡œ ì €ì¥
 	struct tm  tstruct;
 	char       Buffer[80];
 	tstruct = *localtime(&now);
-	strftime(Buffer, sizeof(Buffer), "%Y-%m-%d_%H:%M:%S", &tstruct); // YYYY-MM-DD.HH:mm:ss ÇüÅÂÀÇ ½ºÆ®¸µ
+	strftime(Buffer, sizeof(Buffer), "%Y-%m-%d_%H:%M:%S", &tstruct); // YYYY-MM-DD.HH:mm:ss í˜•íƒœì˜ ìŠ¤íŠ¸ë§
 
 	return Buffer;
 }
@@ -57,7 +57,7 @@ void TimerProc(HWND hwnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////
-	////    0. °øÀ¯¸Ş¸ğ¸® ¼±¾ğ ¹× local variable ¼±¾ğ	
+	////    0. ê³µìœ ë©”ëª¨ë¦¬ ì„ ì–¸ ë° local variable ì„ ì–¸	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -86,7 +86,7 @@ void TimerProc(HWND hwnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////
-	////    1. TCP/IP Socket Åë½Å ¼±¾ğ	
+	////    1. TCP/IP Socket í†µì‹  ì„ ì–¸	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -118,7 +118,7 @@ void TimerProc(HWND hwnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime)
 	printf("Client_RecvData Value3 : %d\n", clientRecv.Value3);
 	printf("Client_RecvData Value4 : %d\n", clientRecv.Value4);
 
-	/////////////////// °øÀ¯ ¸Ş¸ğ¸®¿¡ ÀúÀå ///////////////////
+	/////////////////// ê³µìœ  ë©”ëª¨ë¦¬ì— ì €ì¥ ///////////////////
 	memcpy(chkValue1, clientRecv.Value1, sizeof(char) * 16);
 	memcpy(chkValue3, &clientRecv.Value3, sizeof(int32_t));
 	memcpy(chkValue2, &clientRecv.Value2, sizeof(int32_t));
@@ -147,7 +147,7 @@ int main(int argc, char* argv[], char* envp[])
 	tAddr.sin_port = htons(PORT);
 	tAddr.sin_addr.s_addr = inet_addr(SERVER_IP);
 
-	SetTimer(NULL, TIMER_ID, 1000, (TIMERPROC)TimerProc); //SetTimer ÁöÁ¤ : ÃÊ´ç 1¹ø
+	SetTimer(NULL, TIMER_ID, 1000, (TIMERPROC)TimerProc); //SetTimer ì§€ì • : ì´ˆë‹¹ 1ë²ˆ
 
 	MSG msg;
 	while (GetMessage(&msg, NULL, 0, 0)) {
