@@ -11,7 +11,7 @@
 
 #define PORT 8000
 #define PACKET_SIZE 1000
-#define SERVER_IP "192.168.200.100" // ¼­¹ö ¾ÆÀÌÇÇ
+#define SERVER_IP "xxx.xxx.xxx.xxx" // ì„œë²„ ì•„ì´í”¼
 #define CAMERA_BUFFER_Value2 100
 
 using namespace std;
@@ -38,7 +38,7 @@ typedef struct _EXAMPLE_RECV_PACKET {
 // 8bytes
 
 
-////////////// Socket Åë½ÅÀ» À§ÇÑ struct //////////////////
+////////////// Socket í†µì‹ ì„ ìœ„í•œ struct //////////////////
 struct _EXAMPLE_SEND_PACKET clientRecv;
 struct _EXAMPLE_RECV_PACKET ServerRequest;
 
@@ -47,17 +47,17 @@ int main(int argc, char* argv[], char* envp[])
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////
-	////    1. TCP/IP ¼ÒÄÏ Åë½Å ½ÃÀÛ
+	////    1. TCP/IP ì†Œì¼“ í†µì‹  ì‹œì‘
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	ServerRequest.Counter = 0; //Åë½ÅÀ» À§ÇÑ Counter °ª 0À¸·Î ÃÊ±âÈ­
+	ServerRequest.Counter = 0; //í†µì‹ ì„ ìœ„í•œ Counter ê°’ 0ìœ¼ë¡œ ì´ˆê¸°í™”
 
 	WSADATA wsaData;
 	WSAStartup(MAKEWORD(2, 2), &wsaData);
 
-	SOCKET hSocket; //¼ÒÄÏ »ı¼º
+	SOCKET hSocket; //ì†Œì¼“ ìƒì„±
 	hSocket = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
 
 	SOCKADDR_IN tAddr = {};
@@ -65,23 +65,23 @@ int main(int argc, char* argv[], char* envp[])
 	tAddr.sin_port = htons(PORT);
 	tAddr.sin_addr.s_addr = inet_addr(SERVER_IP);
 
-	///////////////////////// ¹«ÇÑ ·çÇÁ ////////////////////////////
+	///////////////////////// ë¬´í•œ ë£¨í”„ ////////////////////////////
 	while (true)
 	{
-		/////////////// ¼­¹öÂÊÀ¸·Î Counter Áõ°¡ ½ÅÈ£ Àü¼Û /////////////////
-		ServerRequest.Counter = ServerRequest.Counter + 1; // ÀÏÁ¤ °ª ÀÌ»óÀÏ ¶§ ÃÊ±âÈ­ ÇÊ¿ä ¾øÀ½.
+		/////////////// ì„œë²„ìª½ìœ¼ë¡œ Counter ì¦ê°€ ì‹ í˜¸ ì „ì†¡ /////////////////
+		ServerRequest.Counter = ServerRequest.Counter + 1; // ì¼ì • ê°’ ì´ìƒì¼ ë•Œ ì´ˆê¸°í™” í•„ìš” ì—†ìŒ.
 		ServerRequest.Value5 = TRUE;
 		ServerRequest.Value6 = TRUE;
 		ServerRequest.Value7 = TRUE;
 		ServerRequest.Value8 = TRUE;
 
-		/////////////////// ¼­¹öÂÊÀ¸·Î ¿¬°á ¿äÃ» /////////////////////
+		/////////////////// ì„œë²„ìª½ìœ¼ë¡œ ì—°ê²° ìš”ì²­ /////////////////////
 		connect(hSocket, (SOCKADDR*)&tAddr, sizeof(tAddr));
 
-		/////////////////// ¼­¹öÂÊÀ¸·Î Àü¼Û //////////////////////////
-		send(hSocket, (char*)&ServerRequest, sizeof(struct _EXAMPLE_RECV_PACKET), 0); //¼­¹ö¿¡ ¸Ş¼¼Áö¸¦ Àü´Ş
+		/////////////////// ì„œë²„ìª½ìœ¼ë¡œ ì „ì†¡ //////////////////////////
+		send(hSocket, (char*)&ServerRequest, sizeof(struct _EXAMPLE_RECV_PACKET), 0); //ì„œë²„ì— ë©”ì„¸ì§€ë¥¼ ì „ë‹¬
 
-		/////////////////// ¼­¹ö·ÎºÎÅÍ µ¥ÀÌÅÍ ¼ö½Å ///////////////////
+		/////////////////// ì„œë²„ë¡œë¶€í„° ë°ì´í„° ìˆ˜ì‹  ///////////////////
 		recv(hSocket, (char*)&clientRecv, PACKET_SIZE, 0);
 
 		printf("----------------------------------------------------------------\n");
@@ -94,9 +94,9 @@ int main(int argc, char* argv[], char* envp[])
 		printf("Client_RecvData Value4 : %d\n", clientRecv.Value4);
 		printf("----------------------------------------------------------------\n");
 
-		Sleep(1000);	//1000ms ÀÏ½Ã Á¤Áö ¡æ ÃÊ´ç 1¹ø
+		Sleep(1000);	//1000ms ì¼ì‹œ ì •ì§€ â†’ ì´ˆë‹¹ 1ë²ˆ
 	}
 	closesocket(hSocket);
-	WSACleanup(); // WSAStartupÀ» ÇÏ¸é¼­ ÁöÁ¤ÇÑ ³»¿ëÀ» Á¦°Å
+	WSACleanup(); // WSAStartupì„ í•˜ë©´ì„œ ì§€ì •í•œ ë‚´ìš©ì„ ì œê±°
 	return 0;
 }
