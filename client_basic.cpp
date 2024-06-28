@@ -5,7 +5,7 @@
 
 #define PORT 4578
 #define PACKET_SIZE 1024
-#define SERVER_IP "192.168.219.105"
+#define SERVER_IP "xxx.xxx.xxx.xxx"
 
 int main()
 {
